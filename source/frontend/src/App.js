@@ -56,9 +56,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const App = (props) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [authenticatedUserName, setAuthenticatedUserName] = useState('');
-    const [isAuthenticating, setIsAuthenticating] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(true);
+    const [authenticatedUserName, setAuthenticatedUserName] = useState('swm_user');
+    const [isAuthenticating, setIsAuthenticating] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -66,9 +66,7 @@ const App = (props) => {
     const classes = useStyles();
 
     const userHasAuthenticated = username => {
-        const isAuthenticated = !!username;
-        setIsAuthenticated(isAuthenticated);
-        setAuthenticatedUserName(username);
+        // removed authentication
     };
 
     useEffect(() => {
@@ -77,24 +75,10 @@ const App = (props) => {
 
     const initApp = async () => {
         document.title = config.APP_TITLE;
-        try {
-            const session = await Auth.currentSession();
-            if (session) {
-                userHasAuthenticated(session.accessToken.payload.username);
-            }
-        }
-        catch (e) {
-            if (e !== 'No current user') {
-                console.warn(e);
-            }
-        }
-        setIsAuthenticating(false);
     };
 
     const handleLogout = async () => {
-        await Auth.signOut();
-        userHasAuthenticated(false);
-        props.history.push("/login");
+        // removed authentication
     };
 
     const handleDrawerOpen = () => {
